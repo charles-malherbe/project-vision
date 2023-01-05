@@ -9,10 +9,10 @@ class Window(Tk, ):
         super(Window, self).__init__()
         # Répertoire des images à comparer
         self.images_path = "images_library"
-        self.title('Identification de fruits et légumes')
+        self.title('Identification de logo')
         self.resizable(False, False)
         self.geometry('800x800')
-        self.iconbitmap('includes/pics.ico')
+        self.iconbitmap('includes/icon.ico')
         self.labelFrame = ttk.LabelFrame(self, text="Choisir une image")
         self.button()
 
