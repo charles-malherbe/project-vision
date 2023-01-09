@@ -23,7 +23,7 @@ class Recognizer:
         for file in glob.glob(images_path.get() + "/*.png"):
             image = cv2.imread(file, cv2.IMREAD_COLOR)
             image = cv2.resize(image, (500, 500), interpolation=cv2.INTER_AREA)
-            name = file.split("/")[-1].split(".")[0].capitalize()
+            name = file.split("/")[-1].split(".")[0].upper()
             files.append((name, image))
         return files
 
@@ -31,22 +31,22 @@ class Recognizer:
         detector = cv2.ORB_create()
         return detector
 
-    def detect_logo(self, logo):
+    def detect_logo(self, name, logo):
         detector = self.create_detector()
         matcher = self.create_matcher()
         kp_logo, des_logo = detector.detectAndCompute(self.get_bw_image(logo), None)
         kp_image, des_image = detector.detectAndCompute(self.get_bw_image(self.image), None)
         matches = matcher.match(des_logo, des_image)
+        self.type = name
         final = cv2.drawMatches(logo, kp_logo, self.image, kp_image, matches[:20], None, flags=2)
-        cv2.imshow("Comparaison", self.image)
+        cv2.imshow("Comparaison", final)
 
     def create_matcher(self):
         matcher = cv2.BFMatcher()
         return matcher
 
     def compare(self):
-        self.type = "AUCUN LOGO RECONNU"
         for index in self.library:
             name = index[0]
             logo = index[1]
-            self.detect_logo(logo)
+            self.detect_logo(name, logo)
