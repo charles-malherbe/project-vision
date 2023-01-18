@@ -24,7 +24,7 @@ Détection de logo sur image statique avec algorithme SIFT et ORB.
 
 ## Demonstration
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Application](./screenshots/screenshot_1.png)
 
 ## Authors
 
